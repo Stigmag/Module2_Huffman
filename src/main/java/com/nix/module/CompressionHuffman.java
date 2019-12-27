@@ -1,11 +1,15 @@
 package com.nix.module;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class CompressionHuffman  {
 
 
-    public static void incoder(Node root, String str, Map<Character, String> huffmanCode) {
+    public static void incoder(Node root,String str, Map<Character, String> huffmanCode) {
+
         if (root == null)
             return ;
 
@@ -21,25 +25,48 @@ public class CompressionHuffman  {
 
 
     public static int decoder(Node root, int index, StringBuilder sb) {
+        List<Integer> list= new ArrayList<>();
+        List<Integer> test= new ArrayList<>();
+        int numBits=0;
+        char[] mas=sb.toString().toCharArray();
+        for (char number : mas) {
+            list.add(Integer.valueOf(number));
 
-                    if (root == null)
-                return index;
+        }
 
-            // found a leaf node
-            if (root.getLeftChild() == null && root.getRightChild() == null)
-            {
-                System.out.print(root.getCharacter());
-                return index;
-            }
+        for (int j=0; j<list.size();j++)
+        {numBits--;
+            test.add((list.get(j)>>>numBits)&1);
 
-            index++;
 
-            if (sb.charAt(index) == '0')
-                index = decoder(root.getLeftChild(), index, sb);
-            else
-                index = decoder(root.getRightChild(), index, sb);
+        }
+        StringBuilder strbul  = new StringBuilder();
+        Iterator<Integer>  iter = test.iterator();
+        while(iter.hasNext())
+        {
+            strbul.append(iter.next());
 
+        }
+
+
+
+        if (root == null)
             return index;
+        // found a leaf node
+        if (root.getLeftChild()  == null && root.getRightChild() == null)
+        {
+            System.out.print(root.getCharacter());
+            return index;
+        }
+
+        index++;
+
+        if (index == 0)
+            index = decoder(root.getLeftChild(), index, strbul);
+        else
+            index = decoder(root.getRightChild(), index, strbul);
+
+        return index;
 
     }
 }

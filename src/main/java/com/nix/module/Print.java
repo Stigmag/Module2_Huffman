@@ -1,5 +1,8 @@
 package com.nix.module;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Print {
@@ -13,20 +16,47 @@ public class Print {
     }
     public static void printCodeHuffman(String text)
     { StringBuilder sb = new StringBuilder();
+        List<Integer> list= new ArrayList<>();
+        int currentByte=0;
+        int numBits=0;
         for (int i = 0 ; i < text.length(); i++) {
-            sb.append(HuffmanTree.GetTableCode(text).get(text.charAt(i)));
+
+            sb.append(HuffmanTree.GetTableCode(text).get(text.charAt(i)));}
+        char[] mas=sb.toString().toCharArray();
+        for (char number : mas) {
+            list.add(Integer.valueOf(number));
 
         }
+        for (int j=0; j<list.size();j++)
+        {currentByte=  (currentByte<<1)|(list.get(j));
+            numBits++;
+            if(numBits==8)
+            {
+                File.write("kol.hf",currentByte);
+            }
+        }
 
-        System.out.println("\nEncoded string is :\n" +  sb.toString());
-        printDecoderedtext(text,sb);
+
+
+        //  File.write("kol.hf",sb.toString());
+        try{
+            File.read("kol.hf");
+            printDecoderedtext(File.read("kol.hf"),sb);
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.toString());
+        }
+
+
     }
     public static void printDecoderedtext(String text, StringBuilder sb )
     {	int index = -1;
-        System.out.println("\nDecoded string is: \n");
-        while (index < sb.length() - 2) {
-            index = HuffmanTree.GetDecoderText(text, index, sb);}
 
+        while (index < sb.length() - 2) {
+            index = HuffmanTree.GetDecoderText(text, index, sb);
+
+        }
     }
 
 }

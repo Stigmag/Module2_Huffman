@@ -1,8 +1,6 @@
 package com.nix.module;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.PriorityQueue;
+import java.util.*;
 
 
 public class HuffmanTree implements Comparable<HuffmanTree>{
@@ -23,9 +21,9 @@ public class HuffmanTree implements Comparable<HuffmanTree>{
 
 
 
-    public static HuffmanTree build(String text) {
-        Map<Character, Integer> freq = TextProcess.GetFrequency(text);
-         PriorityQueue<HuffmanTree> tree = new PriorityQueue<>();
+    public static HuffmanTree  build(String text) {
+        Map<Character, Integer> freq =  TextProcess.GetFrequency(text);
+        PriorityQueue<HuffmanTree> tree = new PriorityQueue<>();
 
 
         freq.forEach((k, v) -> {
@@ -54,14 +52,13 @@ public class HuffmanTree implements Comparable<HuffmanTree>{
 
         Map<Character, String> huffmanCode = new HashMap<>();
         CompressionHuffman.incoder(HuffmanTree.build(text).getRoot(), "", huffmanCode);
-return huffmanCode;
+        return huffmanCode;
     }
     public static int GetDecoderText(String text,int index,StringBuilder sb)
     {
 
-
         int k= CompressionHuffman.decoder(HuffmanTree.build(text).getRoot(),index,sb);
-       return k;
+        return k;
     }
 
     @Override

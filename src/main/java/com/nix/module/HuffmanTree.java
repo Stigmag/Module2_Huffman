@@ -51,7 +51,8 @@ public class HuffmanTree implements Comparable<HuffmanTree>{
 
 
         Map<Character, String> huffmanCode = new HashMap<>();
-        CompressionHuffman.incoder(HuffmanTree.build(text).getRoot(), "", huffmanCode);
+       CompressionHuffman.incoder(HuffmanTree.build(text).getRoot(), "", huffmanCode);
+
         return huffmanCode;
     }
     public static int GetDecoderText(String text,int index,StringBuilder sb)

@@ -11,7 +11,6 @@ import java.util.Base64;
 public class File {
 
 
-
     //////////////////////////////////////////////////////////////////////////////////
     public static void write(String fileName, int text) {
         java.io.File file = new java.io.File(fileName);
@@ -30,15 +29,13 @@ public class File {
     }
 
     //////////////////////////////////////////////////////////////////////////////////
-    public static  String readImage(String fileName) throws FileNotFoundException {
-        String data="";
-
+    public static String readImage(String fileName) throws FileNotFoundException {
+        String data = "";
 
 
         ImageIcon icon = new ImageIcon(fileName);
         try (ByteArrayOutputStream os = new ByteArrayOutputStream();
-             ImageOutputStream ios = ImageIO.createImageOutputStream(os))
-        {
+             ImageOutputStream ios = ImageIO.createImageOutputStream(os)) {
             BufferedImage img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.BITMASK);
             // g = img.createGraphics();
             // icon.paintIcon(null, g, 0, 0);
@@ -67,8 +64,9 @@ public class File {
                 throw new RuntimeException(e);
             }
             return sb.toString();*/
-        return   data;
+        return data;
     }
+
     /* public static void update(String nameFile, int newText) throws FileNotFoundException {
          exists(nameFile);
          StringBuilder sb = new StringBuilder();
@@ -78,7 +76,7 @@ public class File {
          write(nameFile, sb.toString());
      }*/
     //////////////////////////////////////////////////////////////////////////////////
-    public static String  read(String fileName) throws FileNotFoundException {
+    public static String read(String fileName) throws FileNotFoundException {
         StringBuilder sb = new StringBuilder();
         exists(fileName);
         try {

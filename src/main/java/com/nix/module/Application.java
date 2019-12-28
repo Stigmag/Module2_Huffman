@@ -9,15 +9,15 @@ import java.util.Scanner;
 public class Application {
     private static final Logger logger
             = LoggerFactory.getLogger(Application.class);
-    public static void main( String[] args)
-    {
+    public static void main( String[] args) {
+
         Scanner scanner = new Scanner(System.in);
         args[0]= scanner.nextLine();
         switch( File.getFileExtension(args[0]))
         {
             case ".hf":  try{
 
-                Print.printCodeHuffman(File.read("C:\\Users\\Kate\\Desktop\\Haffman - Copy\\test.txt"));}
+                Print.printCodeHuffman(File.read("kol.hf"));}
             catch (IOException e)
             {
                 //logger.error (e.getMessage(),Application.class.getSimpleName());

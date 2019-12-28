@@ -27,12 +27,30 @@ public class CompressionHuffman  {
 
     public static int decoder(Node root, int index, StringBuilder sb) {
 
+      /*  if (root == nullptr) {
+            return;
+        }
 
+        // found a leaf node
+        if (!root->left && !root->right)
+        {
+            cout << root->ch;
+            return;
+        }
+
+        index++;
+
+        if (str[index] =='0')
+            decode(root->left, index, str);
+        else
+            decode(root->right, index, str);
+    }*/
 
         if (root == null)
             return index;
+
         // found a leaf node
-        if (root.getLeftChild()  == null && root.getRightChild() == null)
+        if (root.getLeftChild() == null && root.getRightChild() == null)
         {
             System.out.print(root.getCharacter());
             return index;
@@ -40,12 +58,13 @@ public class CompressionHuffman  {
 
         index++;
 
-        if (index == 0)
+        if (sb.charAt(index) == '0')
             index = decoder(root.getLeftChild(), index, sb);
         else
             index = decoder(root.getRightChild(), index, sb);
 
         return index;
-
     }
+
 }
+

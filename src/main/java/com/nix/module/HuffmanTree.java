@@ -53,16 +53,13 @@ public class HuffmanTree implements Comparable<HuffmanTree>{
 
         Map<Character, String> huffmanCode = new HashMap<>();
         CompressionHuffman.incoder(HuffmanTree.build(text).getRoot(), "", huffmanCode);
+//File.writeTableCode("tableCode.txt",huffmanCode);
+
         return huffmanCode;
     }
     public static int GetDecoderText(String text,int index,StringBuilder sb)
-    {/* try{
-        String s=File.read("kol.hf");
-    s.BinaryStdIn.readString()}
-    catch (IOException e)
     {
 
-    }*/
 
         int k= CompressionHuffman.decoder(HuffmanTree.build(text).getRoot(),index,sb);
         return k;

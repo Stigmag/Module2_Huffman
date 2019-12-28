@@ -1,7 +1,10 @@
 package com.nix.module;
 
 import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,42 +23,49 @@ public class Print {
         List<Integer> list = new ArrayList<>();
         int currentByte = 0;
         int numBits = 0;
+
         for (int i = 0; i < text.length(); i++) {
 
             sb.append(HuffmanTree.GetTableCode(text).get(text.charAt(i)));
         }
-        char[] mas = sb.toString().toCharArray();
-        for (char number : mas) {
-            list.add(Integer.valueOf(number));
 
+// separate them by space
+        String[] splited = sb.toString().split("");
+// here we will save the numbers
+        int[] numbers = new int[splited.length];
+        for(int i = 0; i < splited.length; i++) {
+            list.add(Integer.parseInt(splited[i]));
         }
         for (int j = 0; j < list.size(); j++) {
-            currentByte = (currentByte << 1) | (list.get(j));
-            numBits++;
-            if (numBits == 8) {
-                File.write("kol.hf", currentByte);
-            }
+
+            File.write("kol.hf", list.get(j));
         }
+
+
+
+
 
 
         //  File.write("kol.hf",sb.toString());
-        try {
-            File.read("kol.hf");
-            printDecoderedtext(File.read("kol.hf"), sb);
-        } catch (IOException e) {
+        try{
+
+            printDecoderedtext(File.readByte("kol.hf"),sb);
+        }
+        catch (IOException e)
+        {
             System.out.println(e.toString());
         }
 
 
     }
-
-    public static void printDecoderedtext(String text, StringBuilder sb) {
-        int index = -1;
+    public static void printDecoderedtext(String text, StringBuilder sb )
+    {	 int index = -1;
 
         while (index < sb.length() - 2) {
             index = HuffmanTree.GetDecoderText(text, index, sb);
 
         }
+
     }
 
 }

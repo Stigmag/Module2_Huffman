@@ -1,16 +1,14 @@
 package com.nix.module;
+
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
-public final class ByteBufferInput implements AutoCloseable{
 
-
+public final class ByteBufferInput implements AutoCloseable {
 
 
     private InputStream input;
-
-
 
 
     private int numBitsRemaining;
@@ -23,10 +21,6 @@ public final class ByteBufferInput implements AutoCloseable{
         currentByte = 0;
         numBitsRemaining = 0;
     }
-
-
-
-
 
 
     public int read() throws IOException {
@@ -45,7 +39,6 @@ public final class ByteBufferInput implements AutoCloseable{
     }
 
 
-
     public int readNoEof() throws IOException {
         int result = read();
         if (result != -1)
@@ -53,7 +46,6 @@ public final class ByteBufferInput implements AutoCloseable{
         else
             throw new EOFException();
     }
-
 
 
     public void close() throws IOException {

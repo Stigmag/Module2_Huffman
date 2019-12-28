@@ -1,21 +1,26 @@
 package com.nix.module;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.*;
 
 public class Print {
+    private static final Logger logger
+            = LoggerFactory.getLogger(Application.class);
     public static void printCodeTable(String text) {
+logger.debug("Huffman Codes are :\n");
 
-        System.out.println("Huffman Codes are :\n");
         for (Map.Entry<Character, String> entry : HuffmanTree.GetTableCode(text).entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
         HashMap<Character,String> mapInFile= new HashMap<>();
         File.writeTableCode("test2.txt",HuffmanTree.GetTableCode(text));
 
-        System.out.println("\nOriginal string was :\n" + text);
+        logger.debug("Original string was :" + text);
     }
 
     public static void printCodeHuffman(String text) {
@@ -30,20 +35,10 @@ public class Print {
 
 
         }
-        System.out.println(sb.toString());
+        logger.debug("Code Huffman compression: "+sb.toString());
 
 
-// separate them by space
-       /* String[] splited = sb.toString().split("");
-// here we will save the numbers
-        int[] numbers = new int[splited.length];
-        for(int i = 0; i < splited.length; i++) {
-            list.add(Integer.parseInt(splited[i]));
-        }
-        for (int j = 0; j < list.size(); j++) {
 
-
-        }*/
 
         File.writeBytes("kol.hf", sb.toString());
 
@@ -53,12 +48,12 @@ public class Print {
         //  File.write("kol.hf",sb.toString());
         try{
             String str=File.readByte("kol.hf");
-            System.out.println(str);
+
             printDecoderedtext(text,File.readByte5("kol.hf",sb));
         }
         catch (IOException e)
         {
-            System.out.println(e.toString());
+           logger.error(e.getMessage());
         }
 
 
@@ -67,9 +62,9 @@ public class Print {
 
     {
         int index = -1;
-
+        logger.debug("Decoded string is: ");
         while (index < sb.length() - 2) {
-            index = HuffmanTree.GetDecoderText(text, index, sb);
+           index = HuffmanTree.GetDecoderText(text, index, sb);
 
         }
 

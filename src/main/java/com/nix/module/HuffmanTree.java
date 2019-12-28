@@ -4,33 +4,30 @@ import java.io.IOException;
 import java.util.*;
 
 
-public class HuffmanTree implements Comparable<HuffmanTree>{
+public class HuffmanTree implements Comparable<HuffmanTree> {
     private Node root;
-    HuffmanTree tree;
+
 
     HuffmanTree(Node root) {
         this.root = root;
     }
 
-    public void setRoot(Node root) {
-        this.root = root;
-    }
+
 
     public Node getRoot() {
         return root;
     }
 
 
-
-    public static  HuffmanTree  build(String text) {
-        Map<Character, Integer> freq =  TextProcess.GetFrequency(text);
+    public static HuffmanTree build(String text) {
+        Map<Character, Integer> freq = TextProcess.GetFrequency(text);
         PriorityQueue<HuffmanTree> tree = new PriorityQueue<>();
 
 
         freq.forEach((k, v) -> {
 
             if (v > 0)
-                tree.offer(new HuffmanTree(new Node(v,k)));
+                tree.offer(new HuffmanTree(new Node(v, k)));
 
         });
 
@@ -47,21 +44,21 @@ public class HuffmanTree implements Comparable<HuffmanTree>{
 
 
     }
-    public static Map<Character,String> GetTableCode(String text)
-    {
+
+    public static Map<Character, String> GetTableCode(String text) {
 
 
         Map<Character, String> huffmanCode = new HashMap<>();
         CompressionHuffman.incoder(HuffmanTree.build(text).getRoot(), "", huffmanCode);
-//File.writeTableCode("tableCode.txt",huffmanCode);
+
 
         return huffmanCode;
     }
-    public static int GetDecoderText(String text,int index,StringBuilder sb)
-    {
+
+    public static int GetDecoderText(String text, int index, StringBuilder sb) {
 
 
-        int k= CompressionHuffman.decoder(HuffmanTree.build(text).getRoot(),index,sb);
+        int k = CompressionHuffman.decoder(HuffmanTree.build(text).getRoot(), index, sb);
         return k;
     }
 

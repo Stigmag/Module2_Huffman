@@ -48,7 +48,7 @@ public class File {
                 List<Integer> list = new ArrayList<>();
 
                 String[] splited = text.split("");
-// here we will save the numbers
+
                 int[] numbers = new int[splited.length];
                 for (int i = 0; i < splited.length; i++) {
                     list.add(Integer.parseInt(splited[i]));
@@ -74,44 +74,20 @@ public class File {
         try (ByteArrayOutputStream os = new ByteArrayOutputStream();
              ImageOutputStream ios = ImageIO.createImageOutputStream(os)) {
             BufferedImage img = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.BITMASK);
-            // g = img.createGraphics();
-            // icon.paintIcon(null, g, 0, 0);
-            // g.dispose();
+
             ImageIO.write(img, "png", os);
-            // img=ImageIO.read(ios);
+
             byte[] bytes = os.toByteArray();
             data = Base64.getEncoder().encodeToString(bytes);
             //System.out.println(data);
         } catch (IOException e) {
             e.printStackTrace();
         }
-           /* StringBuilder sb = new StringBuilder();
-            exists(fileName);
-            try {
-                java.io.File file = new java.io.File(fileName);
 
-                try (BufferedReader in = new BufferedReader(new FileReader(file.getAbsoluteFile()))) {
-                    String s;
-                    while ((s = in.readLine()) != null) {
-                        sb.append(s);
-                        sb.append("\n");
-                    }
-                }
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            return sb.toString();*/
         return data;
     }
 
-    /* public static void update(String nameFile, int newText) throws FileNotFoundException {
-         exists(nameFile);
-         StringBuilder sb = new StringBuilder();
-         String oldFile = read(nameFile);
-         sb.append(oldFile);
-         sb.append(newText);
-         write(nameFile, sb.toString());
-     }*/
+
     //////////////////////////////////////////////////////////////////////////////////
     public static String read(String fileName) throws FileNotFoundException {
         StringBuilder sb = new StringBuilder();
@@ -148,7 +124,7 @@ public class File {
 
     }
 
-    public static StringBuilder readByte5(String fileName,StringBuilder k) throws FileNotFoundException {
+    public static StringBuilder readByte5(String fileName, StringBuilder k) throws FileNotFoundException {
         StringBuilder sb = new StringBuilder();
 
         exists(fileName);
@@ -158,12 +134,7 @@ public class File {
             java.io.File file = new java.io.File(fileName);
             try (ByteBufferInput input = new ByteBufferInput(new FileInputStream(file.getAbsoluteFile()))) {
 
-                // List<Integer> list = new ArrayList<>();
-                // String[] bitArray = s.split("");
-                int[] numbers = new int[k.toString().length()];
-
-
-                for (int bit : numbers) {
+                for (int i = 0; i < k.toString().length(); i++) {
                     b = input.readNoEof();
                     sb.append(b);
                 }

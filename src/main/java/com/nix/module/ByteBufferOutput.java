@@ -1,9 +1,11 @@
 package com.nix.module;
+
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.Objects;
+
 public final class ByteBufferOutput implements AutoCloseable {
 
 
